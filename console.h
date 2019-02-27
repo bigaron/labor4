@@ -6,12 +6,11 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-// VS: alatt nem megy #define _UNIX defined(__linux__) || defined(__sun)
-#if defined(__linux__) || defined(__sun)
-  #define _UNIX
-#endif
-#if defined(_WIN32) || defined(_WIN64)
-  #define _WINX
+#define _WINX defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+#define _UNIX defined(__linux__) || defined(__sun)
+
+#if !defined(_WINX) && !defined(_UNIX)
+# error "OS?"
 #endif
 
 /**

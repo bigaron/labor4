@@ -9,10 +9,10 @@
 
 #include <iostream>
 #include <iomanip>
-#if _WINX
+#if defined(_WINX)
   #include <conio.h>
   #include <windows.h>
-#elif _UNIX
+#elif defined(_UNIX)
   #include <termios.h>    //termios, TCSANOW, ECHO, ICANON
   #include <unistd.h>     //STDIN_FILENO
 #endif
@@ -22,7 +22,7 @@
 /// Noname névtér.
 /// Csak ebből a fájlból érhető el
 namespace {
-#if _WINX
+#if defined(_WINX)
 void clrscr() {
     HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -44,7 +44,7 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(hstdout, dwCursorPosition);
 }
 
-#elif _UNIX
+#elif  defined(_UNIX)
 
 /// Kihasználjuk, hogy ANSI terminál
 void clrscr() {
@@ -113,14 +113,14 @@ Console::~Console() {
 int Console::getch() {
     /// segédmakró
     #define C(c, k) {c,k}
-#if _WINX
+#if defined(_WINX)
     static keyCodes arrows[] = { C(72,KEY_UP), C(80,KEY_DOWN), C(77,KEY_RIGHT), C(75,KEY_LEFT), C(0,0) };
     int ch = ::_getch();
     if (ch == 0xE0) {       /// windows ezt a kódot adja a nyílbillentyűk előtt
         ch = ::_getch();    /// utána jön a billentyű kódja
         return trCode(ch, arrows);
     }
-#elif _UNIX
+#elif defined(_UNIX)
     static keyCodes arrows[] = { C('A',KEY_UP), C('B',KEY_DOWN), C('C',KEY_RIGHT), C('D',KEY_LEFT), C(0,0) };
     int ch = ::_getch();
     if (ch == 0x1b) {       /// ANSI módban ezt adja be a terminál a nyilak előtt
