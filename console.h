@@ -6,10 +6,11 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#define _WINX defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-#define _UNIX defined(__linux__) || defined(__sun)
-
-#if !defined(_WINX) && !defined(_UNIX)
+#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+# define _WINX 
+#elif defined(__linux__) || defined(__sun)
+# define _UNIX
+#else
 # error "OS?"
 #endif
 

@@ -1,4 +1,4 @@
-# Pelda Makefile a Cpp Ellenallas megoldasanak forditasara 
+# Pelda Makefile a Cpp Ellenallas (3. laborfeledati) megoldasanak forditasara 
 # Solaris (ural2) es Linux ala.
 
 objs1 = resistor.o resistor_test.o # forditando obj. fajlok
@@ -6,11 +6,11 @@ heads1 = resistor.h #              # headerek, amitol minden fugg
 prog1 = resistor_test #            # a program neve
 
 objs2 = resistor.o resistor_test2.o 
-heads2 = resistor.h 
+heads2 = resistor.h elkeszult.h
 prog2 = resistor_test2
 
 objs3 = resistor.o potmeter.o console.o potmeter_teszt.o
-heads3 = resistor.h potmeter.h console.h
+heads3 = resistor.h elkeszult.h potmeter.h console.h 
 prog3 = potmeter_teszt
 
 targets = $(prog1) $(prog2) $(prog3)
@@ -20,6 +20,7 @@ CXX = g++ #                        # a C++ fordito neve
 CXXFLAGS = -pedantic -Wall #       # C++ kapcsolok: legyen bobeszedu, 
 CXXFLAGS += -g #                   # ... es legyen debug info is
 CXXFLAGS += -fno-elide-constructors# ne optimalizálja másoló konstruktorok hívását
+CXXFLAGS += $(CMD)		   # CMD a parancssorból (pl: CMD=-DDEBUG)
 
 # alapertelmezett cel: erdeklodik, hogy melyik legyen
 

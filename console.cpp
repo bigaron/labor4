@@ -91,7 +91,7 @@ inline int Console::trCode(int code, keyCodes* kt) {
 
 /// UNIX/Linux alatt át ki kell kapcsolni az echo-t és a kanonikus módot
 Console::Console() {
-#if _UNIX
+#if defined(_UNIX)
     struct termios newt;
     tcgetattr(STDIN_FILENO, &::term_save);
     newt = term_save;
@@ -102,7 +102,7 @@ Console::Console() {
 
 /// Elmentett működési módok visszaállítása
 Console::~Console() {
-#if _UNIX
+#if defined(_UNIX)
     tcsetattr(STDIN_FILENO, TCSANOW, &::term_save);
 #endif
 }
