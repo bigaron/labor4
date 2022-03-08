@@ -14,6 +14,7 @@
 #include "gtest_lite.h"
 #include "potmeter.h"
 #include "console.h"
+#include "resistor.h"
 
 int main() {
 

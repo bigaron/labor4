@@ -20,14 +20,14 @@
 int main() {
   GTINIT(std::cin);       // Csak C(J)PORTA működéséhez kell
 
-  Resistor r;
+  Resistor r; //1.
 
   TEST(Resistor, HazibanAdottR) {
     double d = r.getR();
-    EXPECT_EQ(999999., d) << "Jporta feladatban megadott default ertekkel hasonlitson!" << std::endl;
+    EXPECT_EQ(9., d) << "Jporta feladatban megadott default ertekkel hasonlitson!" << std::endl;
   } END
 
-  Resistor r1(1000), r2(3000);
+  Resistor r1(1000), r2(3000); //2.
 
   TEST(Resistor, EgyPareteresKonsruktor) {
     double d = r1.getR();	  	            // 1000
@@ -35,7 +35,7 @@ int main() {
   } END
 
   TEST(Resistor, Masolo) {
-    Resistor r11 = r1;
+    Resistor r11 = r1; //3.
     double d = r11.getR();                 // 1000
     EXPECT_DOUBLE_EQ(1000., d);
   } END
@@ -47,7 +47,7 @@ int main() {
 
   TEST(Resistor, SetDef) {
     Resistor::setDef(20);
-    Resistor rt[5];
+    Resistor rt[5]; //4.
     double d = rt[3].getR();                // 20
     EXPECT_DOUBLE_EQ(20., d);
   } END
@@ -61,33 +61,33 @@ int main() {
 
 #if ELKESZULT >= 5
   TEST(ResistorTest, getI) {				// getI
-    const Resistor r0(2);
+    const Resistor r0(2); //6.
     EXPECT_DOUBLE_EQ(6.06, r0.getI(12.12));
   } END
 #endif
 
 #if ELKESZULT >= 6
   TEST(ResistorTest, getU) {				// getU
-    const Resistor r0(12.12);
+    const Resistor r0(12.12); //7.
     EXPECT_DOUBLE_EQ(24.24, r0.getU(2));
   } END
 #endif
 
 #if ELKESZULT >= 7
   TEST(ResistorTest, EQ) {				    // operator==
-    const Resistor r0(12345.6789);
-    const Resistor r1(123456789);           // r1 ez pont a 10-szerese r0-nak
+    const Resistor r0(12345.6789); //8.
+    const Resistor r1(123456789);  //9.         // r1 ez pont a 10-szerese r0-nak
     EXPECT_TRUE(r0 == r0);                  // önmagával
     EXPECT_FALSE(r0 == r1);
 
-	Resistor r2 = 10000 * r0;               // számítás nem lesz pontos
+	  Resistor r2 = 10000 * r0;               // számítás nem lesz pontos
     EXPECT_TRUE(r2 == r1);
 
     r2 = r2 + Resistor(1e-5);               // de ha tényleg eltér?
     EXPECT_FALSE(r2 == r1);
 
-    const Resistor r3(1e-18);               // kis értéknél hogy viselkedik?
-    r2 = r3 + Resistor(1e-18);
+    const Resistor r3(1e-18);          //10.     // kis értéknél hogy viselkedik?
+    r2 = r3 + Resistor(1e-18); //11.
     EXPECT_FALSE(r3 == r1);
   } END
 #endif
@@ -95,7 +95,7 @@ int main() {
 #if ELKESZULT >= 8
   TEST(ResistorTest, Inserter) {
     std::ostringstream oss;     // stringstream-be írunk, és szövegesen hasonlítunk !
-    oss << Resistor(8.45) << '\t' << Resistor(100);
+    oss << Resistor(8.45) << '\t' << Resistor(100); //12.
     EXPECT_STREQ("8.45\t100", oss.str().c_str());
 } END
 #endif // ELKESZULT >= 8

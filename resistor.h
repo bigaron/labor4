@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include "gtest_lite.h"
 
 #ifdef DEBUG
 # define Pr(str) std::cout << str <<std::endl
